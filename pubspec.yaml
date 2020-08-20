@@ -1,0 +1,38 @@
+name: tech_story
+description: A new Flutter application.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+
+  cupertino_icons: ^0.1.3
+  font_awesome_flutter: ^8.8.1
+  fluttericon: ^1.0.7
+  carousel_slider: ^2.2.1
+  characters: ^1.0.0
+  flutter_tts: ^1.2.6
+  platform: ^2.2.1
+  firebase_core: ^0.4.5
+  firebase_auth: ^0.16.1
+  cloud_firestore: ^0.13.7
+  modal_progress_hud: ^0.1.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+
+  uses-material-design: true
+  assets:
+    - images/
+

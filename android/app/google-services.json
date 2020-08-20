@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "497151991456",
+    "firebase_url": "https://techstory-736d8.firebaseio.com",
+    "project_id": "techstory-736d8",
+    "storage_bucket": "techstory-736d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497151991456:android:9517d3592ae90a48b2b3c5",
+        "android_client_info": {
+          "package_name": "com.RosaliaSL.tech_story"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497151991456-ru9tdrf8jfu6nqjrbrgih775k911lju7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJlqpu0xrrAfjXdoEMQNXM6lOl8okh7sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497151991456-ru9tdrf8jfu6nqjrbrgih775k911lju7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
