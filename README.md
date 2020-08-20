@@ -1,4 +1,4 @@
-# tech_story
+# TechStory
 
 A new Flutter application.
 
