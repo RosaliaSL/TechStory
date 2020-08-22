@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'constants.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:io' show Platform;
@@ -52,14 +51,7 @@ class _InformationPageState extends State<InformationPage> {
   initializeTts() {
     _flutterTts = FlutterTts();
 
-    if (Platform.isAndroid) {
-//      _flutterTts.ttsInitHandler(() {
-//        setTtsLanguage();
-//      });
-      setTtsLanguage();
-    } else if (Platform.isIOS) {
-      setTtsLanguage();
-    }
+    setTtsLanguage();
 
     _flutterTts.setStartHandler(() {
       setState(() {
@@ -85,17 +77,17 @@ class _InformationPageState extends State<InformationPage> {
     await _flutterTts.setLanguage("en-US");
   }
 
-  void speechSettings1() {
-    _flutterTts.setVoice("en-us-x-sfg#male_1-local");
-    _flutterTts.setPitch(1.5);
-    _flutterTts.setSpeechRate(.9);
-  }
-
-  void speechSettings2() {
-    _flutterTts.setVoice("en-us-x-sfg#male_2-local");
-    _flutterTts.setPitch(1);
-    _flutterTts.setSpeechRate(0.5);
-  }
+//  void speechSettings1() {
+//    _flutterTts.setVoice("en-us-x-sfg#male_1-local");
+//    _flutterTts.setPitch(1.5);
+//    _flutterTts.setSpeechRate(.9);
+//  }
+//
+//  void speechSettings2() {
+//    _flutterTts.setVoice("en-us-x-sfg#male_2-local");
+//    _flutterTts.setPitch(1);
+//    _flutterTts.setSpeechRate(0.5);
+//  }
 
   Future _speak(String text) async {
     if (text != null && text.isNotEmpty) {
@@ -138,9 +130,9 @@ class _InformationPageState extends State<InformationPage> {
                     Navigator.pop(context);
                   },
                   child: Icon(
-                    Icons.arrow_back,
+                    Icons.arrow_back_ios,
                     color: Colors.white,
-                    size: screenHeight * 0.04310,
+                    size: screenHeight * 0.03694,
                   ),
                 ),
                 SizedBox(
@@ -148,11 +140,6 @@ class _InformationPageState extends State<InformationPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-//                    _firestore.collection('bookmarks').add({
-//                      'Image': widget.startup.bookmarkPhoto,
-//                      'startup': widget.startup.startupName,
-//                      'year': widget.startup.yearOfEstablishment,
-//                    });
                     if (selectedBookmark == kInactiveBookmark) {
                       _firestore
                           .collection('bookmarks')
@@ -175,8 +162,6 @@ class _InformationPageState extends State<InformationPage> {
                     });
                   },
                   child: Icon(
-//                  Icons.bookmark,
-//                  FontAwesomeIcons.bookmark,
                     selectedBookmark,
                     color: Colors.white,
                     size: screenHeight * 0.04926,
@@ -189,9 +174,7 @@ class _InformationPageState extends State<InformationPage> {
             bottom: screenHeight * 0.03694,
             left: screenWidth * 0.03733,
             child: Container(
-//              width: screenHeight * 0.43103,
               width: screenWidth * 0.93333,
-//              height: screenHeight * 0.61576,
               height: screenHeight * 0.55418,
               decoration: BoxDecoration(
                 borderRadius:

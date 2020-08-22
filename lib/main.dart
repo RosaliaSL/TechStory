@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tech_story/bookmarks_page.dart';
-import 'package:tech_story/information_page.dart';
-import 'package:tech_story/information_page.dart';
 import 'package:tech_story/registration_screen.dart';
 import 'package:tech_story/welcome_screen.dart';
 import 'menu_page.dart';

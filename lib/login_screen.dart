@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:tech_story/constants.dart';
 import 'package:tech_story/menu_page.dart';
 import 'button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'menu_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -24,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoggedIn = false;
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-  _login() async {
+  void _login() async {
     try {
       setState(() {
         showSpinner = true;
@@ -55,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  _logout() {
+  void _logout() {
     _googleSignIn.signOut();
     setState(() {
       _isLoggedIn = false;

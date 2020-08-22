@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tech_story/bookmarks_page.dart';
 import 'package:tech_story/welcome_screen.dart';
 import 'startups.dart';
 import 'information_page.dart';
@@ -49,7 +48,7 @@ class _MenuPageState extends State<MenuPage> {
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   bool _isLoggedIn = true;
 
-  _logout() {
+  void _logout() {
     _googleSignIn.signOut();
     setState(() {
       _isLoggedIn = false;
@@ -78,10 +77,8 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    double space = 30;
 
     return Scaffold(
-//      backgroundColor: Colors.white,
       backgroundColor: Color(0xFF121212),
       body: SafeArea(
         child: Column(
@@ -177,56 +174,48 @@ class _MenuPageState extends State<MenuPage> {
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: screenWidth * 0.02463, right: screenWidth * 0.02463),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: screenWidth * 0.02666,
-                    right: screenWidth * 0.02666,
-                    bottom: Platform.isIOS ? 0 : screenHeight * 0.039408,
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      GestureDetector(
+                  left: screenWidth * 0.08,
+                  right: screenWidth * 0.08,
+                  bottom: Platform.isIOS ? 0 : screenHeight * 0.039408,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        _logout();
+                        _auth.signOut();
+                        Navigator.pushNamed(context, WelcomeScreen.id);
+                      },
+                      child: Icon(
+                        Icons.exit_to_app,
+                        color: Colors.grey[700],
+                        size: screenHeight * 0.05911,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: screenHeight * 0.00246),
+                      child: Icon(
+                        FontAwesomeIcons.compass,
+                        color: Color(0xD9FFFFFF),
+                        size: screenHeight * 0.05049,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: screenHeight * 0.00492),
+                      child: GestureDetector(
                         onTap: () {
-                          _logout();
-                          _auth.signOut();
-                          Navigator.pushNamed(context, WelcomeScreen.id);
+                          Navigator.pushNamed(context, BookmarksPage.id);
                         },
                         child: Icon(
-//                        Icons.person_outline,
-                          Icons.exit_to_app,
-//                        color: Colors.grey,
+                          FontAwesomeIcons.bookmark,
                           color: Colors.grey[700],
-                          size: screenHeight * 0.05911,
+                          size: screenHeight * 0.043103,
                         ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(bottom: screenHeight * 0.00246),
-                        child: Icon(
-                          FontAwesomeIcons.compass,
-                          color: Color(0xD9FFFFFF),
-                          size: screenHeight * 0.05049,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(bottom: screenHeight * 0.00492),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, BookmarksPage.id);
-                          },
-                          child: Icon(
-                            FontAwesomeIcons.bookmark,
-                            color: Colors.grey[700],
-                            size: screenHeight * 0.043103,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
             )

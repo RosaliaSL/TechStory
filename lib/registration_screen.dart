@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tech_story/constants.dart';
 import 'package:tech_story/menu_page.dart';
 import 'button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,7 +21,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-  _login() async {
+  void _login() async {
     try {
       setState(() {
         showSpinner = true;
@@ -53,7 +52,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     }
   }
 
-  _logout() {
+  void _logout() {
     _googleSignIn.signOut();
     setState(() {
       _isLoggedIn = false;
@@ -229,8 +228,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       showSpinner = true;
                     });
                     try {
-                      final newUser = await _auth.signInWithEmailAndPassword(
-                          email: email, password: password);
+                      final newUser =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: email, password: password);
                       if (newUser != null) {
                         Navigator.pushNamed(context, MenuPage.id);
                       }

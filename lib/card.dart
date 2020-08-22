@@ -32,11 +32,9 @@ class BookmarkCard extends StatelessWidget {
         children: <Widget>[
           Material(
             color: Colors.grey[900],
-//                  color: Color(0xFF0A0F23),
             borderRadius: BorderRadius.circular(screenHeight * 0.02463),
             elevation: screenHeight * 0.00492,
             child: Padding(
-//                    padding: EdgeInsets.all(screenHeight * 0.02463),
               padding: EdgeInsets.only(
                 left: screenWidth * 0.02463,
                 right: screenWidth * 0.02463,
@@ -57,7 +55,6 @@ class BookmarkCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: screenHeight * 0.03078,
                             fontWeight: FontWeight.bold,
-//                                  color: Colors.grey[800],
                             color: Colors.grey[300],
                           ),
                         ),
@@ -69,7 +66,6 @@ class BookmarkCard extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.grey[300],
                             fontSize: screenHeight * 0.01847,
-//                                  color: Colors.white,
                           ),
                         ),
                       ],
@@ -81,21 +77,15 @@ class BookmarkCard extends StatelessWidget {
           ),
           Stack(
             children: <Widget>[
-              Container(
+              SizedBox(
                 height: screenHeight * 0.23399,
-                width: screenWidth * 0.4,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(screenHeight * 0.02463),
-                ),
               ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(screenHeight * 0.02463),
                 child: Image(
                   image: AssetImage(imagePath),
-//                        height: screenHeight * 0.20935,
                   height: screenHeight * 0.20935,
                   fit: BoxFit.cover,
-//                        width: screenWidth * 0.35,
                   width: screenWidth * 0.29333,
                 ),
               ),
