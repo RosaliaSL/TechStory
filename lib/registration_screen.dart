@@ -4,6 +4,7 @@ import 'package:tech_story/menu_page.dart';
 import 'button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = 'registration_screen';
@@ -16,6 +17,42 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool showSpinner = false;
   String email;
   String password;
+  bool _isLoggedIn = false;
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+
+  _login() async {
+    try {
+      setState(() {
+        showSpinner = true;
+      });
+      final googleUser = await _googleSignIn.signIn();
+      if (googleUser != null) {
+        Navigator.pushNamed(context, MenuPage.id);
+        setState(() {
+          _isLoggedIn = true;
+          showSpinner = false;
+        });
+      } else {
+        setState(() {
+          showSpinner = false;
+        });
+      }
+    } catch (err) {
+      setState(() {
+        showSpinner = false;
+      });
+      print(err);
+    }
+  }
+
+  _logout() {
+    _googleSignIn.signOut();
+    setState(() {
+      _isLoggedIn = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -218,10 +255,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: screenHeight * 0.01231,
               ),
               Center(
-                child: Image.asset(
-                  'images/google.png',
-                  width: screenWidth * 0.08,
-                  height: screenHeight * 0.03694,
+                child: GestureDetector(
+                  onTap: () {
+                    _login();
+                  },
+                  child: Image.asset(
+                    'images/google.png',
+                    width: screenWidth * 0.08,
+                    height: screenHeight * 0.03694,
+                  ),
                 ),
               ),
             ],

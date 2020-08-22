@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'menu_page.dart';
 import 'card.dart';
 import 'welcome_screen.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class BookmarksPage extends StatefulWidget {
   static String id = 'bookmarks_page';
@@ -18,6 +19,15 @@ class _BookmarksPageState extends State<BookmarksPage> {
   final _firestore = Firestore.instance;
   final _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  bool _isLoggedIn = true;
+
+  _logout() {
+    _googleSignIn.signOut();
+    setState(() {
+      _isLoggedIn = false;
+    });
+  }
 
   void bookmarksStream() async {
     await for (var snapshot in _firestore.collection('bookmarks').snapshots()) {
@@ -138,6 +148,8 @@ class _BookmarksPageState extends State<BookmarksPage> {
 //                },
                       child: GestureDetector(
                         onTap: () {
+                          _logout();
+                          _auth.signOut();
                           Navigator.pushNamed(context, WelcomeScreen.id);
                         },
                         child: Icon(

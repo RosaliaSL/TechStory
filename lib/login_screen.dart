@@ -6,6 +6,7 @@ import 'button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'menu_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   static String id = 'login_screen';
@@ -19,6 +20,40 @@ class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
+  bool _isLoggedIn = false;
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+
+  _login() async {
+    try {
+      setState(() {
+        showSpinner = true;
+      });
+      final googleUser = await _googleSignIn.signIn();
+      if (googleUser != null) {
+        Navigator.pushNamed(context, MenuPage.id);
+        setState(() {
+          _isLoggedIn = true;
+          showSpinner = false;
+        });
+      } else {
+        setState(() {
+          showSpinner = false;
+        });
+      }
+    } catch (err) {
+      setState(() {
+        showSpinner = false;
+      });
+      print(err);
+    }
+  }
+
+  _logout() {
+    _googleSignIn.signOut();
+    setState(() {
+      _isLoggedIn = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -221,10 +256,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: screenHeight * 0.01231,
               ),
               Center(
-                child: Image.asset(
-                  'images/google.png',
-                  width: screenWidth * 0.08,
-                  height: screenHeight * 0.03694,
+                child: GestureDetector(
+                  onTap: () {
+                    _login();
+                  },
+                  child: Image.asset(
+                    'images/google.png',
+                    width: screenWidth * 0.08,
+                    height: screenHeight * 0.03694,
+                  ),
                 ),
               ),
             ],

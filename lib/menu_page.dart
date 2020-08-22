@@ -8,6 +8,7 @@ import 'information_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'bookmarks_page.dart';
 import 'dart:io' show Platform;
+import 'package:google_sign_in/google_sign_in.dart';
 
 class MenuPage extends StatefulWidget {
   static String id = 'menu_page';
@@ -45,6 +46,15 @@ class _MenuPageState extends State<MenuPage> {
 
   final _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  bool _isLoggedIn = true;
+
+  _logout() {
+    _googleSignIn.signOut();
+    setState(() {
+      _isLoggedIn = false;
+    });
+  }
 
   @override
   void initState() {
@@ -180,6 +190,7 @@ class _MenuPageState extends State<MenuPage> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
+                          _logout();
                           _auth.signOut();
                           Navigator.pushNamed(context, WelcomeScreen.id);
                         },
