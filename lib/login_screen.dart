@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'menu_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LoginScreen extends StatefulWidget {
   static String id = 'login_screen';
@@ -39,6 +40,12 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() {
           showSpinner = false;
         });
+        Alert(
+          context: context,
+          title: 'Wrong Email/Password',
+          desc:
+              'Your email or password is incorrect. Please recheck them and try again',
+        ).show();
       }
     } catch (err) {
       setState(() {
@@ -239,6 +246,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       setState(() {
                         showSpinner = false;
                       });
+                      Alert(
+                        context: context,
+                        title: 'Wrong Email/Password',
+                        desc:
+                            'Your email or password is incorrect. Please recheck them and try again',
+                      ).show();
                     }
                   },
                 ),

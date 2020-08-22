@@ -5,6 +5,7 @@ import 'button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = 'registration_screen';
@@ -37,6 +38,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         setState(() {
           showSpinner = false;
         });
+        Alert(
+          context: context,
+          title: 'Wrong Email/Password',
+          desc:
+              'Your email or password is incorrect. Please recheck them and try again',
+        ).show();
       }
     } catch (err) {
       setState(() {
@@ -235,6 +242,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       setState(() {
                         showSpinner = false;
                       });
+                      Alert(
+                        context: context,
+                        title: 'Wrong Email/Password',
+                        desc:
+                            'Your email or password is incorrect. Please recheck them and try again',
+                      ).show();
                     }
                   },
                   buttonTitle: 'Register',
