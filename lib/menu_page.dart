@@ -131,7 +131,7 @@ class _MenuPageState extends State<MenuPage> {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
                                     return InformationPage(
-                                      startup: startup[i],
+                                      startup: startups[i],
                                     );
                                   }));
                                 },

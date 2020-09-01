@@ -20,7 +20,7 @@ class Startup {
   final String id;
 }
 
-List<Startup> startup = [
+List<Startup> startups = [
   Startup(
     startupName: 'Zomato',
     yearOfEstablishment: 2008,

@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String password;
   bool _isLoggedIn = false;
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  String error;
 
   void _login() async {
     try {
@@ -244,11 +245,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       setState(() {
                         showSpinner = false;
                       });
+                      if ('$e' ==
+                          'PlatformException(ERROR_WRONG_PASSWORD, The password is invalid or the user does not have a password., null)') {
+                        error =
+                            'The password you entered is incorrect. Please try again.';
+                      } else if ('$e' ==
+                          'PlatformException(ERROR_USER_NOT_FOUND, There is no user record corresponding to this identifier. The user may have been deleted., null)') {
+                        error =
+                            'There is no user record corresponding to this email. Please try again';
+                      } else if ('$e' ==
+                          'PlatformException(ERROR_INVALID_EMAIL, The email address is badly formatted., null)') {
+                        error =
+                            'The email address that you entered is invalid. Please try again';
+                      } else {
+                        error =
+                            'Your details are incorrect. Please recheck them and try again.';
+                      }
                       Alert(
                         context: context,
-                        title: 'Wrong Email/Password',
-                        desc:
-                            'Your email or password is incorrect. Please recheck them and try again',
+                        title: 'Something went wrong.',
+                        desc: error,
                       ).show();
                     }
                   },

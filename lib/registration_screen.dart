@@ -18,6 +18,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String email;
   String password;
   bool _isLoggedIn = false;
+  String error;
 
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
@@ -242,11 +243,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       setState(() {
                         showSpinner = false;
                       });
+                      if ('$e' ==
+                          'PlatformException(ERROR_EMAIL_ALREADY_IN_USE, The email address is already in use by another account., null)') {
+                        error =
+                            'The email address is already in use by another account.';
+                      } else if ('$e' ==
+                          'PlatformException(ERROR_WEAK_PASSWORD, The password must be 6 characters long or more., null)') {
+                        error =
+                            'The password must be 6 characters long or more.';
+                      } else if ('$e' ==
+                          'PlatformException(ERROR_INVALID_EMAIL, The email address is badly formatted., null)') {
+                        error =
+                            'The email address that you entered is invalid. Please try again';
+                      } else {
+                        error =
+                            'Your details are incorrect. Please recheck them and try again.';
+                      }
                       Alert(
                         context: context,
-                        title: 'Wrong Email/Password',
-                        desc:
-                            'Your email or password is incorrect. Please recheck them and try again',
+                        title: 'Something went wrong.',
+                        desc: error,
                       ).show();
                     }
                   },

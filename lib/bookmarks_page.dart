@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tech_story/information_page.dart';
 import 'menu_page.dart';
 import 'card.dart';
 import 'welcome_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'startups.dart';
 
 class BookmarksPage extends StatefulWidget {
   static String id = 'bookmarks_page';
@@ -74,17 +76,33 @@ class _BookmarksPageState extends State<BookmarksPage> {
                 );
               }
               final bookmarks = snapshot.data.documents;
-              List<BookmarkCard> startupWidgets = [];
+              List<GestureDetector> startupWidgets = [];
               for (var bookmark in bookmarks) {
                 final name = bookmark.data['startup'];
                 final year = bookmark.data['year'];
                 final imagePath = bookmark.data['Image'];
-                final startupWidget = BookmarkCard(
-                  screenHeight: screenHeight,
-                  screenWidth: screenWidth,
-                  yearOfEstablishment: year,
-                  startupName: name,
-                  imagePath: imagePath,
+                Startup startup1;
+                for (var startup in startups) {
+                  if (startup.startupName == name) {
+                    startup1 = startup;
+                  }
+                }
+                final startupWidget = GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return InformationPage(
+                        startup: startup1,
+                      );
+                    }));
+                  },
+                  child: BookmarkCard(
+                    screenHeight: screenHeight,
+                    screenWidth: screenWidth,
+                    yearOfEstablishment: year,
+                    startupName: name,
+                    imagePath: imagePath,
+                  ),
                 );
                 startupWidgets.add(startupWidget);
               }
